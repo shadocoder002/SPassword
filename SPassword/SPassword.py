@@ -6,10 +6,10 @@ import sys
 import time
 import msvcrt as m
 import subprocess as sp
+import ConfigFile
 
 schars = str(string.punctuation)
 numbers = str(string.digits)
-print(numbers)
 
 def clearscreen():
     sp.call('cls' if os.name == 'nt' else 'clear', shell=True)
@@ -23,23 +23,14 @@ def presscont():
     startpage()
 def passwordchecker():
 
-    # --> Start of Configuration <--
-
-    # If the password is in "BadWordPhrases", it will automatically flag for being to obvious
-    BadWordPhrases = []
-
-    # Min and max password lengths
-    MinPasswordLength = 8
-    MaxPasswordLength = 30
-
-    # set to 0 to not check or 1 to check
-
-    CheckSymbols = 1
-    CheckNumbers = 1
-
-    # --> End of Configuration <--
+    BadWordPhrases = ConfigFile.BadWordPhrases
+    MinPasswordLength = ConfigFile.MinPasswordLength
+    MaxPasswordLength = ConfigFile.MaxPasswordLength
+    CheckSymbols = ConfigFile.CheckSymbols
+    CheckNumbers = ConfigFile.CheckNumbers
 
     # Entering Password to check
+
     Password = input("Enter Password to Check: ")
 
     # Checking for bad passwords below using configuration
@@ -80,10 +71,10 @@ def recommend():
 
 # Interface user interacts with (startpage)
 def startpage():
+    global option
     clearscreen()
     print("1. Password Recommendations\n2. Check your password\n3. Exit")
-    option = input()
-    try: int(option)
+    try: option = int(input("> "))
     except ValueError: print("Only use numbers!")
     if option == 1:
         recommend()
@@ -95,5 +86,5 @@ def startpage():
         print("Invalid Option (auto clearing in 3s)"); time.sleep(3); startpage()
 
 # Start of Program
-
+print("Finishing Initiating SPassword!")
 startpage()
