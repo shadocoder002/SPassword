@@ -28,6 +28,7 @@ def passwordchecker():
     MaxPasswordLength = ConfigFile.MaxPasswordLength
     CheckSymbols = ConfigFile.CheckSymbols
     CheckNumbers = ConfigFile.CheckNumbers
+    CheckCapital = ConfigFile.CheckCapital
 
     # Entering Password to check
 
@@ -49,6 +50,8 @@ def passwordchecker():
                 if numbers[i] in Password[x]: tmp += 1
         if tmp == 0 and CheckNumbers:
             print("Password doesn't have any numbers."); presscont()
+        if not any(map(str.isupper, str(Password))):
+            print("Password doesn't have any uppercase letters."); presscont()
         else:
             if tmp <= 2 and CheckNumbers: print("WARNING: Password only contains 2 or less numbers.")
             print("Your password is secure!\nPress any key to continue...")
@@ -87,4 +90,5 @@ def startpage():
 
 # Start of Program
 print("Finishing Initiating SPassword!")
+print("Developed by: shadowcoder")
 startpage()

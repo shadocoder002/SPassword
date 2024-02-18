@@ -11,6 +11,7 @@ MaxPasswordLength = 30
 
 CheckSymbols = 1
 CheckNumbers = 1
+CheckCapital = 1
 
 # --> End of Configuration <--
 print("Configuration Loaded Successfully")
